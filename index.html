@@ -10,6 +10,11 @@
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous"
     />
+    <style>
+      .hidden {
+        display: none;
+      }
+    </style>
   </head>
   <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -29,43 +34,47 @@
             </button>
             <ul class="dropdown-menu">
               <li>
-                <button class="dropdown-item" type="button">Action</button>
-              </li>
-              <li>
-                <button class="dropdown-item active" type="button">
-                  Another action
+                <button class="dropdown-item" type="button" id="ind">
+                  Indonesia
                 </button>
               </li>
               <li>
-                <button class="dropdown-item" type="button">
-                  Something else here
+                <button class="dropdown-item" type="button" id="english">
+                  English
+                </button>
+              </li>
+              <li>
+                <button class="dropdown-item" type="button" id="jpn">
+                  日本語
                 </button>
               </li>
             </ul>
           </div>
           <span class="mx-2">|</span>
-          <span class="navbar-text mb-2 mb-lg-0"> Anggara </span>
+          <span class="navbar-text mb-2 mb-lg-0" id="nameNavbar">name</span>
         </div>
       </div>
     </nav>
 
     <div class="container">
-      <div class="input-group my-4">
-        <input
-          type="text"
-          class="form-control"
-          placeholder="Create new To-do"
-          aria-label="Recipient's username"
-          aria-describedby="button-addon2"
-        />
-        <button
-          class="btn btn-outline-secondary"
-          type="button"
-          id="button-addon2"
-        >
-          Add
-        </button>
-      </div>
+      <form name="formAdd">
+        <div class="input-group my-4">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Create new To-do"
+            name="inputTodo"
+            autocomplete="off"
+          />
+          <button
+            class="btn btn-outline-secondary"
+            type="button"
+            id="button-addon2"
+          >
+            Add
+          </button>
+        </div>
+      </form>
     </div>
     <hr />
     <div class="container">
@@ -78,39 +87,12 @@
             aria-describedby="button-addon2"
           />
         </div>
+        <p
+          class="text-success bg-light py-1 px-2 rounded fst-italic hidden"
+          id="feedback"
+        ></p>
         <table class="table">
-          <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>Membuat roti panggang</td>
-              <td>
-                <button class="btn btn-outline-success mx-1 my-1">Done</button
-                ><button class="btn btn-outline-danger">Delete</button>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>
-                Melakukan pekerjaan yang tidak bisa dilakukan oleh orang lain
-                karena rahasia
-              </td>
-              <td>
-                <button class="btn btn-outline-success mx-1 my-1">Done</button
-                ><button class="btn btn-outline-danger">Delete</button>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td>
-                Melihat tukang sayur yang sedang bergelantungan diantara 2 pohon
-                bambu dekat rumah pak lurah
-              </td>
-              <td>
-                <button class="btn btn-outline-success mx-1 my-1">Done</button
-                ><button class="btn btn-outline-danger">Delete</button>
-              </td>
-            </tr>
-          </tbody>
+          <tbody id="tbTodo"></tbody>
         </table>
         <table class="table">
           <thead>
@@ -195,5 +177,6 @@
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
       crossorigin="anonymous"
     ></script>
+    <script type="module" src="js/main.mjs"></script>
   </body>
 </html>

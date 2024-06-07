@@ -14,15 +14,21 @@
   <body>
     <div class="mx-auto p-2">
       <div class="position-absolute top-50 start-50 translate-middle">
-        <div class="form-floating mb-3">
-          <input
-            type="text"
-            class="form-control"
-            id="floatingInput"
-            placeholder="name"
-          />
-          <label for="floatingInput" id="setNameLabel">Nama :</label>
-        </div>
+        <form name="nameForm">
+          <div class="form-floating mb-3">
+            <input
+              type="text"
+              name="nameInput"
+              class="form-control"
+              id="floatingInput"
+              placeholder="name"
+              autocomplete="off"
+            />
+            <label for="floatingInput" id="setNameLabel">Nama :</label>
+            <div class="valid-feedback" id="feedback"></div>
+            <input type="submit" hidden />
+          </div>
+        </form>
       </div>
     </div>
     <script
