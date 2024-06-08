@@ -17,28 +17,38 @@ export class Todo {
       this.#nullData();
     } else {
       this.#clearTodolist();
-      for (let i = 0; i < this.#data.length; i++) {
+      for (let i = 0; i < 5; i++) {
         const data = this.#data[i];
-        this.#show(data, i + 1);
+        this.#show(data, `data${i + 1}`);
       }
     }
   }
 
   saveToLocal(content) {
+    let success = false;
     if (this.#data1 === null) {
       localStorage.setItem("data1", content);
+      success = true;
     } else if (this.#data2 === null) {
       localStorage.setItem("data2", content);
+      success = true;
     } else if (this.#data3 === null) {
       localStorage.setItem("data3", content);
+      success = true;
     } else if (this.#data4 === null) {
       localStorage.setItem("data4", content);
+      success = true;
     } else if (this.#data5 === null) {
       localStorage.setItem("data5", content);
+      success = true;
     } else {
-      this.hiddenContent("text-success", "text-danger", "Data Maksimal 5");
+      this.feedBack("Maksimal hanya 5 data!");
     }
-    window.location.reload();
+
+    if (success) {
+      this.feedBack("Berhasil Menambah data!");
+      window.location.reload();
+    }
   }
 
   #clearTodolist() {
@@ -63,49 +73,64 @@ export class Todo {
     td.appendChild(img);
   }
 
-  #show(todo, index) {
-    // <tr>
-    const tr = document.createElement("tr");
+  #show(todo, dataName) {
+    if (todo !== null) {
+      // <tr>
+      const tr = document.createElement("tr");
 
-    // Numbers
-    const thNumber = document.createElement("th");
-    thNumber.textContent = index;
+      // Numbers
+      const thNumber = document.createElement("th");
+      thNumber.textContent = "→";
+      thNumber.style = "width: 5%";
 
-    // To-do Content
-    const tdValue = document.createElement("td");
-    tdValue.textContent = todo;
+      // To-do Content
+      const tdValue = document.createElement("td");
+      tdValue.className = "content";
+      tdValue.textContent = todo;
+      tdValue.style = "width: 75%";
 
-    // Button Done & Delete
-    const tdButton = document.createElement("td");
-    // btn done
-    const btnDone = document.createElement("input");
-    btnDone.type = "button";
-    btnDone.className = "btn btn-outline-success mx-1 my-1";
-    btnDone.value = "Done";
-    tdButton.appendChild(btnDone);
-    // btn delete
-    const btnDelete = document.createElement("input");
-    btnDelete.type = "button";
-    btnDelete.className = "btn btn-outline-danger";
-    btnDelete.value = "Delete";
-    tdButton.appendChild(btnDelete);
+      // To-do Content
+      const tddataName = document.createElement("td");
+      tddataName.className = "hidden dataName";
+      tddataName.textContent = dataName;
 
-    // set <tr> child
-    tr.appendChild(thNumber);
-    tr.appendChild(tdValue);
-    tr.appendChild(tdButton);
+      // Button Done & Delete
+      const tdButton = document.createElement("td");
+      tdButton.style = "width: 20%";
+      // btn done
+      const btnDone = document.createElement("input");
+      btnDone.type = "button";
+      btnDone.className = "btn btn-outline-success mx-1 my-1";
+      btnDone.value = "Done";
+      tdButton.appendChild(btnDone);
+      // btn delete
+      const btnDelete = document.createElement("input");
+      btnDelete.type = "button";
+      btnDelete.name = "btnDelete";
+      btnDelete.className = "btn btn-outline-danger";
+      btnDelete.value = "Delete";
+      tdButton.appendChild(btnDelete);
 
-    // set <tr> appendChild of <tBody>
-    const tbTodo = document.getElementById("tbTodo");
-    tbTodo.appendChild(tr);
+      // set <tr> child
+      tr.appendChild(thNumber);
+      tr.appendChild(tdValue);
+      tr.appendChild(tddataName);
+      tr.appendChild(tdButton);
+
+      // set <tr> appendChild of <tBody>
+      const tbTodo = document.getElementById("tbTodo");
+      tbTodo.appendChild(tr);
+    }
   }
 
-  hiddenContent(removingClass, addingClass, textContent) {
-    const feedBack = document.getElementById("feedback");
-    feedBack.classList.contains("hidden")
-      ? feedBack.classList.remove("hidden")
-      : feedBack.classList.remove(removingClass);
-    feedBack.classList.add(addingClass);
-    feedBack.textContent = textContent;
+  deleteData(data) {
+    if (confirm("Yakin untuk menghapus data ini?")) {
+      localStorage.removeItem(data);
+      window.location.reload();
+    }
+  }
+
+  feedBack(message) {
+    alert(message);
   }
 }

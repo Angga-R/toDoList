@@ -23,23 +23,24 @@ switch (language) {
 
 const todo = new Todo();
 
+// Create new To-do
 document.forms["formAdd"].onsubmit = function (event) {
   event.preventDefault();
   const todoData = document.forms["formAdd"]["inputTodo"];
   if (todoData.value === "") {
-    todo.hiddenContent(
-      "text-success",
-      "text-danger",
-      "Data tidak boleh kosong!"
-    );
+    todo.feedBack("Tidak bisa menambahkan data kosong!");
   } else {
     todo.saveToLocal(todoData.value);
-    todo.hiddenContent(
-      "text-danger",
-      "text-success",
-      "Berhasil menambah data!"
-    );
     todo;
   }
   document.forms["formAdd"].reset();
 };
+
+// Button delete click (delete data)
+const btnDelete = document.getElementsByName("btnDelete");
+const dataName = document.getElementsByClassName("dataName");
+btnDelete.forEach((element, i) => {
+  btnDelete[i].onclick = function () {
+    todo.deleteData(dataName[i].textContent);
+  };
+});

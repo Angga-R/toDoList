@@ -1,0 +1,5 @@
+9-6-2024 :
+- validasi create new todo < 25 char
+- validasi set name
+- search
+- Done button
