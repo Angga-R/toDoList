@@ -34,7 +34,11 @@ inputNama.addEventListener("keyup", () => {
 
 document.forms["nameForm"].onsubmit = function (event) {
   event.preventDefault();
-  const name = document.forms["nameForm"]["nameInput"].value;
-  localStorage.setItem("name", name);
-  window.location.replace("/index.html");
+  if (inputNama.value.length > 10) {
+  } else if (inputNama.value === "") {
+  } else {
+    const name = document.forms["nameForm"]["nameInput"].value;
+    localStorage.setItem("name", name);
+    window.location.replace("/index.html");
+  }
 };

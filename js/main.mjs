@@ -29,11 +29,23 @@ document.forms["formAdd"].onsubmit = function (event) {
   const todoData = document.forms["formAdd"]["inputTodo"];
   if (todoData.value === "") {
     todo.feedBack("Tidak bisa menambahkan data kosong!");
+  } else if (todoData.value.length > 50) {
   } else {
     todo.saveToLocal(todoData.value);
     todo;
   }
   document.forms["formAdd"].reset();
+};
+
+const inputCreate = document.getElementsByName("inputTodo")[0];
+inputCreate.onkeyup = () => {
+  if (inputCreate.value.length > 50) {
+    inputCreate.classList.add("is-invalid");
+  } else {
+    inputCreate.classList.contains("is-invalid")
+      ? inputCreate.classList.remove("is-invalid")
+      : "";
+  }
 };
 
 // Button delete click (delete data)

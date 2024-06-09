@@ -66,20 +66,26 @@
             name="inputTodo"
             autocomplete="off"
           />
-          <div class="valid-feedback" id="feedback"></div>
           <button
             class="btn btn-outline-secondary"
             type="button"
+            style="
+              border-top-right-radius: 15%;
+              border-bottom-right-radius: 15%;
+            "
             id="button-addon2"
           >
             Add
           </button>
+          <div class="invalid-feedback fst-italic" id="feedback">
+            Tidak bisa lebih dari 50 karakter
+          </div>
         </div>
       </form>
     </div>
     <hr />
     <div class="container">
-      <div class="container-fluid bg-secondary py-3 rounded">
+      <div class="container bg-secondary py-3 px-2 rounded">
         <div class="input-group mb-2">
           <input
             type="text"

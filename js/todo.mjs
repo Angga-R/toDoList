@@ -86,8 +86,11 @@ export class Todo {
       // To-do Content
       const tdValue = document.createElement("td");
       tdValue.className = "content";
+      tdValue.style = "width : 75%";
+      if (todo.length >= 25) {
+        todo = todo.slice(0, 25) + "\n" + todo.slice(25);
+      }
       tdValue.textContent = todo;
-      tdValue.style = "width: 75%";
 
       // To-do Content
       const tddataName = document.createElement("td");
