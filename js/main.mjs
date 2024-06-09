@@ -72,3 +72,11 @@ btnDelete.forEach((element, i) => {
     todo.deleteData(dataName[i].textContent);
   };
 });
+
+// Button done click
+const btnDone = document.getElementsByName("btnDone");
+btnDone.forEach((element, i) => {
+  btnDone[i].onclick = function () {
+    todo.dataDone(dataName[i].textContent);
+  };
+});

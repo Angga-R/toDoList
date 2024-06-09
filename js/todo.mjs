@@ -14,6 +14,7 @@ export class Todo {
       this.#data4 === null &&
       this.#data5 === null
     ) {
+      document.getElementById("delete-all-todo").className = "hidden";
       this.#nullData();
     } else {
       this.#clearTodolist();
@@ -112,6 +113,7 @@ export class Todo {
     // btn done
     const btnDone = document.createElement("input");
     btnDone.type = "button";
+    btnDone.name = "btnDone";
     btnDone.className = "btn btn-outline-success mx-1 my-1";
     btnDone.value = "Done";
     tdButton.appendChild(btnDone);
@@ -150,6 +152,22 @@ export class Todo {
       localStorage.removeItem(data);
       window.location.reload();
     }
+  }
+
+  dataDone(data) {
+    if (localStorage.getItem("history1") === null) {
+      localStorage.setItem("history1", localStorage.getItem(data));
+    } else if (localStorage.getItem("history2") === null) {
+      localStorage.setItem("history2", localStorage.getItem(data));
+    } else if (localStorage.getItem("history3") === null) {
+      localStorage.setItem("history3", localStorage.getItem(data));
+    } else if (localStorage.getItem("history4") === null) {
+      localStorage.setItem("history4", localStorage.getItem(data));
+    } else if (localStorage.getItem("history5") === null) {
+      localStorage.setItem("history5", localStorage.getItem(data));
+    }
+    localStorage.removeItem(data);
+    window.location.reload();
   }
 
   feedBack(message) {
