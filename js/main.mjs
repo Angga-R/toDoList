@@ -57,6 +57,13 @@ searchInput.onkeydown = function () {
   new Todo();
 };
 
+// Delete All To-do
+const clearTodo = document.getElementById("delete-all-todo");
+clearTodo.onclick = (event) => {
+  event.preventDefault();
+  todo.deleteAllData();
+};
+
 // Button delete click (delete data)
 const btnDelete = document.getElementsByName("btnDelete");
 const dataName = document.getElementsByClassName("dataName");

@@ -134,6 +134,17 @@ export class Todo {
     tbTodo.appendChild(tr);
   }
 
+  deleteAllData() {
+    if (confirm("Yakin akan menghapus semua data?")) {
+      localStorage.removeItem("data1");
+      localStorage.removeItem("data2");
+      localStorage.removeItem("data3");
+      localStorage.removeItem("data4");
+      localStorage.removeItem("data5");
+      window.location.reload();
+    }
+  }
+
   deleteData(data) {
     if (confirm("Yakin untuk menghapus data ini?")) {
       localStorage.removeItem(data);
