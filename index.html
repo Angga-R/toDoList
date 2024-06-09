@@ -56,6 +56,7 @@
       </div>
     </nav>
 
+    <!-- Create new To-do Form -->
     <div class="container">
       <form name="formAdd">
         <div class="input-group my-4">
@@ -86,15 +87,35 @@
     <hr />
     <div class="container">
       <div class="container bg-secondary py-3 px-2 rounded">
+        <!-- Search -->
         <div class="input-group mb-2">
           <input
             type="text"
             class="form-control"
             placeholder="search...."
+            id="searchInput"
+            autocomplete="off"
             aria-describedby="button-addon2"
           />
         </div>
+
         <table class="table">
+          <thead>
+            <tr>
+              <th colspan="3">
+                <span class="fs-4"
+                  >Your's To-do
+                  <a
+                    class="link-danger link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
+                    style="font-size: 15px"
+                    href="#"
+                  >
+                    Delete All
+                  </a></span
+                >
+              </th>
+            </tr>
+          </thead>
           <tbody id="tbTodo"></tbody>
         </table>
         <table class="table">

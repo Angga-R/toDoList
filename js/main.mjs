@@ -48,6 +48,15 @@ inputCreate.onkeyup = () => {
   }
 };
 
+// Search
+const searchInput = document.getElementById("searchInput");
+searchInput.onkeyup = function () {
+  new Todo();
+};
+searchInput.onkeydown = function () {
+  new Todo();
+};
+
 // Button delete click (delete data)
 const btnDelete = document.getElementsByName("btnDelete");
 const dataName = document.getElementsByClassName("dataName");

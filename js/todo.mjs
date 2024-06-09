@@ -19,7 +19,17 @@ export class Todo {
       this.#clearTodolist();
       for (let i = 0; i < 5; i++) {
         const data = this.#data[i];
-        this.#show(data, `data${i + 1}`);
+
+        const searchText = document
+          .getElementById("searchInput")
+          .value.toLowerCase(); // mengambil value dari input search dan diubah ke huruf kecil semua
+
+        // jika didalam todo ada termasuk kata yang diinputkan dalam input pencarian,
+        if (data !== null) {
+          if (data.toLowerCase().includes(searchText)) {
+            this.#show(data, `data${i + 1}`);
+          }
+        }
       }
     }
   }
@@ -74,56 +84,54 @@ export class Todo {
   }
 
   #show(todo, dataName) {
-    if (todo !== null) {
-      // <tr>
-      const tr = document.createElement("tr");
+    // <tr>
+    const tr = document.createElement("tr");
 
-      // Numbers
-      const thNumber = document.createElement("th");
-      thNumber.textContent = "→";
-      thNumber.style = "width: 5%";
+    // Numbers
+    const thNumber = document.createElement("th");
+    thNumber.textContent = "→";
+    thNumber.style = "width: 5%";
 
-      // To-do Content
-      const tdValue = document.createElement("td");
-      tdValue.className = "content";
-      tdValue.style = "width : 75%";
-      if (todo.length >= 25) {
-        todo = todo.slice(0, 25) + "\n" + todo.slice(25);
-      }
-      tdValue.textContent = todo;
-
-      // To-do Content
-      const tddataName = document.createElement("td");
-      tddataName.className = "hidden dataName";
-      tddataName.textContent = dataName;
-
-      // Button Done & Delete
-      const tdButton = document.createElement("td");
-      tdButton.style = "width: 20%";
-      // btn done
-      const btnDone = document.createElement("input");
-      btnDone.type = "button";
-      btnDone.className = "btn btn-outline-success mx-1 my-1";
-      btnDone.value = "Done";
-      tdButton.appendChild(btnDone);
-      // btn delete
-      const btnDelete = document.createElement("input");
-      btnDelete.type = "button";
-      btnDelete.name = "btnDelete";
-      btnDelete.className = "btn btn-outline-danger";
-      btnDelete.value = "Delete";
-      tdButton.appendChild(btnDelete);
-
-      // set <tr> child
-      tr.appendChild(thNumber);
-      tr.appendChild(tdValue);
-      tr.appendChild(tddataName);
-      tr.appendChild(tdButton);
-
-      // set <tr> appendChild of <tBody>
-      const tbTodo = document.getElementById("tbTodo");
-      tbTodo.appendChild(tr);
+    // To-do Content
+    const tdValue = document.createElement("td");
+    tdValue.className = "content";
+    tdValue.style = "width : 75%";
+    if (todo.length >= 25) {
+      todo = todo.slice(0, 25) + "\n" + todo.slice(25);
     }
+    tdValue.textContent = todo;
+
+    // To-do Content
+    const tddataName = document.createElement("td");
+    tddataName.className = "hidden dataName";
+    tddataName.textContent = dataName;
+
+    // Button Done & Delete
+    const tdButton = document.createElement("td");
+    tdButton.style = "width: 20%";
+    // btn done
+    const btnDone = document.createElement("input");
+    btnDone.type = "button";
+    btnDone.className = "btn btn-outline-success mx-1 my-1";
+    btnDone.value = "Done";
+    tdButton.appendChild(btnDone);
+    // btn delete
+    const btnDelete = document.createElement("input");
+    btnDelete.type = "button";
+    btnDelete.name = "btnDelete";
+    btnDelete.className = "btn btn-outline-danger";
+    btnDelete.value = "Delete";
+    tdButton.appendChild(btnDelete);
+
+    // set <tr> child
+    tr.appendChild(thNumber);
+    tr.appendChild(tdValue);
+    tr.appendChild(tddataName);
+    tr.appendChild(tdButton);
+
+    // set <tr> appendChild of <tBody>
+    const tbTodo = document.getElementById("tbTodo");
+    tbTodo.appendChild(tr);
   }
 
   deleteData(data) {
