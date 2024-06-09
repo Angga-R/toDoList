@@ -1,36 +1,28 @@
+if (!localStorage.getItem("language")) {
+  window.location.replace("/choose-language.html");
+} else if (!localStorage.getItem("name")) {
+  window.location.replace("/set-name.html");
+}
+
 import { Todo } from "./todo.mjs";
 import { History } from "./history.mjs";
+import { Language } from "./language.mjs";
 
+new Language();
+const todo = new Todo();
+const history = new History();
+
+// Set name
 const name = localStorage.getItem("name");
 const nameNavbar = document.getElementById("nameNavbar");
 nameNavbar.textContent = name;
-
-const language = localStorage.getItem("language");
-const indonesia = document.getElementById("ind");
-const english = document.getElementById("english");
-const jpn = document.getElementById("jpn");
-
-switch (language) {
-  case "indonesia":
-    indonesia.classList.toggle("active");
-    break;
-  case "english":
-    english.classList.toggle("active");
-    break;
-  case "jpn":
-    jpn.classList.toggle("active");
-    break;
-}
-
-const todo = new Todo();
-const history = new History();
 
 // Create new To-do
 document.forms["formAdd"].onsubmit = function (event) {
   event.preventDefault();
   const todoData = document.forms["formAdd"]["inputTodo"];
   if (todoData.value === "") {
-    todo.feedBack("Tidak bisa menambahkan data kosong!");
+    Language.addNullDataFeedback();
   } else if (todoData.value.length > 50) {
   } else {
     todo.saveToLocal(todoData.value);
@@ -39,6 +31,7 @@ document.forms["formAdd"].onsubmit = function (event) {
   document.forms["formAdd"].reset();
 };
 
+// create new todo validation
 const inputCreate = document.getElementsByName("inputTodo")[0];
 inputCreate.onkeyup = () => {
   if (inputCreate.value.length > 50) {
@@ -66,13 +59,6 @@ clearTodo.onclick = (event) => {
   todo.deleteAllData();
 };
 
-// Delete All History
-const clearHistory = document.getElementById("delete-all-history");
-clearHistory.onclick = (event) => {
-  event.preventDefault();
-  history.deleteAllHistory();
-};
-
 // Button delete click (delete data)
 const btnDelete = document.getElementsByName("btnDelete");
 const dataName = document.getElementsByClassName("dataName");
@@ -89,3 +75,10 @@ btnDone.forEach((element, i) => {
     todo.dataDone(dataName[i].textContent);
   };
 });
+
+// Delete All History
+const clearHistory = document.getElementById("delete-all-history");
+clearHistory.onclick = (event) => {
+  event.preventDefault();
+  history.deleteAllHistory();
+};

@@ -1,3 +1,5 @@
+import { Language } from "./language.mjs";
+
 export class Todo {
   #data1 = localStorage.getItem("data1");
   #data2 = localStorage.getItem("data2");
@@ -17,7 +19,7 @@ export class Todo {
       document.getElementById("delete-all-todo").className = "hidden";
       this.#nullData();
     } else {
-      this.#clearTodolist();
+      this.#clearDuplicate();
       for (let i = 0; i < 5; i++) {
         const data = this.#data[i];
 
@@ -53,16 +55,16 @@ export class Todo {
       localStorage.setItem("data5", content);
       success = true;
     } else {
-      this.feedBack("Maksimal hanya 5 data!");
+      Language.maxDataFeedback();
     }
 
     if (success) {
-      this.feedBack("Berhasil Menambah data!");
+      Language.addDataSuccessFeedback();
       window.location.reload();
     }
   }
 
-  #clearTodolist() {
+  #clearDuplicate() {
     const tbTodo = document.getElementById("tbTodo"); // mengambil <tbody id='todolistBody'>
     while (tbTodo.firstChild) {
       // ketika masih ada turunan pertama dari si <tbody> (<tr>)
@@ -76,7 +78,13 @@ export class Todo {
     const td = document.createElement("td");
     const img = document.createElement("img");
 
-    img.src = "img/empty_data/Indonesia.png";
+    if (Language.lan == "indonesia") {
+      img.src = "img/empty_data/Indonesia.png";
+    } else if (Language.lan == "english") {
+      img.src = "img/empty_data/English.png";
+    } else if (Language.lan == "jpn") {
+      img.src = "img/empty_data/Jpn.png";
+    }
     img.className = "rounded mx-auto img-fluid";
 
     tbTodo.appendChild(tr);
@@ -115,14 +123,15 @@ export class Todo {
     btnDone.type = "button";
     btnDone.name = "btnDone";
     btnDone.className = "btn btn-outline-success mx-1 my-1";
-    btnDone.value = "Done";
+    btnDone.value = Language.doneButton();
     tdButton.appendChild(btnDone);
     // btn delete
     const btnDelete = document.createElement("input");
     btnDelete.type = "button";
     btnDelete.name = "btnDelete";
+    btnDelete.id = "btnDelete";
     btnDelete.className = "btn btn-outline-danger";
-    btnDelete.value = "Delete";
+    btnDelete.value = Language.deleteButton();
     tdButton.appendChild(btnDelete);
 
     // set <tr> child
@@ -137,7 +146,7 @@ export class Todo {
   }
 
   deleteAllData() {
-    if (confirm("Yakin akan menghapus semua data?")) {
+    if (confirm(Language.deleteAllDataConfirm("todo"))) {
       localStorage.removeItem("data1");
       localStorage.removeItem("data2");
       localStorage.removeItem("data3");
@@ -148,7 +157,7 @@ export class Todo {
   }
 
   deleteData(data) {
-    if (confirm("Yakin untuk menghapus data ini?")) {
+    if (confirm(Language.deleteDataConfirm())) {
       localStorage.removeItem(data);
       window.location.reload();
     }
@@ -168,9 +177,5 @@ export class Todo {
     }
     localStorage.removeItem(data);
     window.location.reload();
-  }
-
-  feedBack(message) {
-    alert(message);
   }
 }

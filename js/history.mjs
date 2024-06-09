@@ -1,3 +1,5 @@
+import { Language } from "./language.mjs";
+
 export class History {
   #dataHistory1 = localStorage.getItem("history1");
   #dataHistory2 = localStorage.getItem("history2");
@@ -48,7 +50,13 @@ export class History {
     const td = document.createElement("td");
     const img = document.createElement("img");
 
-    img.src = "img/empty_data/Indonesia.png";
+    if (Language.lan == "indonesia") {
+      img.src = "img/empty_data/Indonesia.png";
+    } else if (Language.lan == "english") {
+      img.src = "img/empty_data/English.png";
+    } else if (Language.lan == "jpn") {
+      img.src = "img/empty_data/Jpn.png";
+    }
     img.className = "rounded mx-auto img-fluid";
 
     tbHistory.appendChild(tr);
@@ -83,7 +91,7 @@ export class History {
   }
 
   deleteAllHistory() {
-    if (confirm("Yakin akan menghapus semua history?")) {
+    if (confirm(Language.deleteAllDataConfirm("history"))) {
       localStorage.removeItem("history1");
       localStorage.removeItem("history2");
       localStorage.removeItem("history3");
