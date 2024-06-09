@@ -1,4 +1,5 @@
 import { Todo } from "./todo.mjs";
+import { History } from "./history.mjs";
 
 const name = localStorage.getItem("name");
 const nameNavbar = document.getElementById("nameNavbar");
@@ -22,6 +23,7 @@ switch (language) {
 }
 
 const todo = new Todo();
+const history = new History();
 
 // Create new To-do
 document.forms["formAdd"].onsubmit = function (event) {
@@ -62,6 +64,13 @@ const clearTodo = document.getElementById("delete-all-todo");
 clearTodo.onclick = (event) => {
   event.preventDefault();
   todo.deleteAllData();
+};
+
+// Delete All History
+const clearHistory = document.getElementById("delete-all-history");
+clearHistory.onclick = (event) => {
+  event.preventDefault();
+  history.deleteAllHistory();
 };
 
 // Button delete click (delete data)
