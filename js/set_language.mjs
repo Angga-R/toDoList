@@ -1,5 +1,9 @@
-if (localStorage.getItem("language")) {
-  window.location.replace("/index.html");
+if (localStorage.getItem("language") == "indonesia") {
+  if (localStorage.getItem("language") == "english") {
+    if (localStorage.getItem("language") == "jpn") {
+      window.location.replace("/index.html");
+    }
+  }
 }
 
 document.querySelector(".indonesia").onclick = () => {

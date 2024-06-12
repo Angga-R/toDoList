@@ -1,6 +1,12 @@
-if (!localStorage.getItem("language")) {
-  window.location.replace("/choose-language.html");
-} else if (!localStorage.getItem("name")) {
+if (localStorage.getItem("language") != "indonesia") {
+  if (localStorage.getItem("language") != "english") {
+    if (localStorage.getItem("language") != "jpn") {
+      window.location.replace("/choose-language.html");
+    }
+  }
+}
+
+if (!localStorage.getItem("name")) {
   window.location.replace("/set-name.html");
 }
 
@@ -15,7 +21,7 @@ const history = new History();
 // Set name
 const name = localStorage.getItem("name");
 const nameNavbar = document.getElementById("nameNavbar");
-nameNavbar.textContent = name;
+nameNavbar.textContent = name.slice(0, 8);
 
 // Create new To-do
 document.forms["formAdd"].onsubmit = function (event) {

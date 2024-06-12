@@ -1,6 +1,12 @@
-if (!localStorage.getItem("language")) {
-  window.location.replace("/choose-language.html");
-} else if (localStorage.getItem("name")) {
+if (localStorage.getItem("language") != "indonesia") {
+  if (localStorage.getItem("language") != "english") {
+    if (localStorage.getItem("language") != "jpn") {
+      window.location.replace("/choose-language.html");
+    }
+  }
+}
+
+if (localStorage.getItem("name")) {
   window.location.replace("/index.html");
 }
 import { Language } from "./language.mjs";
@@ -20,9 +26,9 @@ function inputNamaClass(addClass, removeClass) {
 
 // validation name
 inputNama.addEventListener("keyup", () => {
-  if (inputNama.value.length > 10) {
+  if (inputNama.value.length > 8) {
     inputNamaClass("is-invalid", "is-valid");
-    feedBack.textContent = Language.feedbackForName("10chara");
+    feedBack.textContent = Language.feedbackForName("8chara");
   } else if (inputNama.value === "") {
     inputNamaClass("is-invalid", "is-valid");
     feedBack.textContent = Language.feedbackForName("zero");
@@ -34,7 +40,7 @@ inputNama.addEventListener("keyup", () => {
 // set name
 document.forms["nameForm"].onsubmit = function (event) {
   event.preventDefault();
-  if (inputNama.value.length > 10) {
+  if (inputNama.value.length > 8) {
   } else if (inputNama.value === "") {
   } else {
     const name = document.forms["nameForm"]["nameInput"].value;

@@ -106,7 +106,7 @@ export class Todo {
     tdValue.className = "content";
     tdValue.style = "width : 75%";
     if (todo.length >= 25) {
-      todo = todo.slice(0, 25) + "\n" + todo.slice(25);
+      todo = todo.slice(0, 25) + "\n" + todo.slice(25, 50);
     }
     tdValue.textContent = todo;
 

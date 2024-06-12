@@ -206,11 +206,11 @@ export class Language {
     } else {
       switch (Language.lan) {
         case "indonesia":
-          return "Maksimal 10 karakter!";
+          return "Maksimal 8 karakter!";
         case "english":
-          return "Max 10 character!";
+          return "Max 8 character!";
         case "jpn":
-          return "名前が長すぎ「max.10」";
+          return "名前が長すぎ「max.8」";
       }
     }
   }
